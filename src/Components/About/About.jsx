@@ -1,0 +1,110 @@
+import React, { useEffect, useState } from "react";
+import { Typewriter } from "react-simple-typewriter";
+import Tilt from "react-parallax-tilt";
+import profileImage from "../../assets/profiles.jpeg";
+
+const About = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect screen width
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return (
+    <section
+      id="about"
+      className="py-12 px-6 sm:px-10 md:px-16 lg:px-32 font-sans bg-black text-white"
+    >
+      <div className="flex flex-col-reverse md:flex-row items-center gap-10 md:gap-20">
+        {/* -------- LEFT SIDE -------- */}
+        <div className="w-full md:w-1/2 text-center md:text-left">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 leading-tight">
+            Hi, I am
+          </h1>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight text-[#8245ec]">
+            Jayesh Patil
+          </h2>
+
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-6">
+            <span className="text-white">I am a </span>
+            <span className="text-[#8245ec]">
+              <Typewriter
+                words={["Frontend Developer", "Backend Developer", "Coder"]}
+                loop={0}
+                cursor
+                cursorStyle="|"
+                typeSpeed={70}
+                deleteSpeed={50}
+                delaySpeed={1500}
+              />
+            </span>
+          </h3>
+
+          <p className="text-gray-400 text-base sm:text-lg mb-8 leading-relaxed">
+            I'm a passionate Full Stack Web Developer, skilled in building
+            responsive, scalable, and user-friendly applications using the MERN
+            stack (MongoDB, Express.js, React.js, Node.js). I enjoy turning
+            complex problems into clean and efficient code. With a strong focus
+            on performance and design, I aim to build digital experiences that
+            leave a lasting impact. I'm currently sharpening my development
+            skills through real-world projects and preparing myself for exciting
+            opportunities in the tech industry.
+          </p>
+
+          <a
+            href="https://drive.google.com/file/d/1tTd_e_WU0d7ez3nqJWRqQ2fDFBdyPlE2/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-white py-3 px-8 rounded-full mt-5 text-lg font-bold transition duration-300 transform hover:scale-105"
+            style={{
+              background: "linear-gradient(90deg, #8245ec, #a855f7)",
+              boxShadow: "0 0 2px #8245ec, 0 0 2px #8245ec, 0 0 40px #8245ec",
+            }}
+          >
+            DOWNLOAD CV
+          </a>
+        </div>
+
+        {/* -------- RIGHT SIDE (IMAGE) -------- */}
+        <div className="w-full md:w-1/2 flex justify-center md:justify-end">
+          {isMobile ? (
+            <img
+              src={profileImage}
+              alt="Jayesh"
+              className="w-56 h-56 sm:w-64 sm:h-64 md:w-[24rem] md:h-[24rem] 
+              border-4 border-purple-700 rounded-full 
+              object-cover object-[center_25%]
+              drop-shadow-[0_10px_25px_rgba(130,69,236,0.6)] 
+              transition-all duration-300 ease-in-out"
+            />
+          ) : (
+            <Tilt
+              className="w-56 h-56 sm:w-64 sm:h-64 md:w-[24rem] md:h-[24rem] 
+              border-4 border-purple-700 rounded-full overflow-hidden"
+              tiltMaxAngleX={20}
+              tiltMaxAngleY={20}
+              perspective={1000}
+              scale={1.05}
+              transitionSpeed={1000}
+              gyroscope={true}
+            >
+              <img
+                src={profileImage}
+                alt="Jayesh"
+                className="w-full h-full rounded-full object-cover object-[center_15%]
+                drop-shadow-[0_10px_25px_rgba(130,69,236,0.6)]
+                transition-transform duration-500 ease-in-out hover:scale-105"
+              />
+            </Tilt>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default About;
